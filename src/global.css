@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "inter", sans-serif;
+}
+
+:root {
+    width: 100%;
+    height: 100vh;
+    
+    --purple: #8284fa;
+    --gray-700: #0d0d0d;
+    --gray-500: #262626;
+    --gray-300: #808080;
+}
+  
+a {
+    text-decoration: none;
+}
