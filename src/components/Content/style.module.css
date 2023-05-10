@@ -26,6 +26,11 @@
 }
 
 .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
     width: 90px;
     height: 52px;
 
@@ -38,4 +43,9 @@
 
 .button:hover {
     filter: brightness(1.5);
+}
+
+.img {
+    height: 16px;
+    width: 16px;
 }
