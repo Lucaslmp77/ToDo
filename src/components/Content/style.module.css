@@ -49,3 +49,44 @@
     height: 16px;
     width: 16px;
 }
+
+.content_header {
+    display: flex;
+    
+    justify-content: space-between;
+
+    margin: 64px 0 24px;
+}
+
+.tasks_container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tasks_created {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+
+    color: var(--blue);
+}
+
+.tasks_done {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+
+    color: var(--purple);
+}
+
+.span_value {
+    background: var(--gray-400);
+    color: var(--gray-200);
+
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    padding: 2px 8px;
+    border-radius: 999px;
+}
