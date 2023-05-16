@@ -8,23 +8,31 @@ import { Task } from "../../models/task";
 
 export const Content = () => {
   const [taskList, setTaskList] = useState<Task[]>([]);
-  const [description, setDescription] = useState<string>("")
+  const [description, setDescription] = useState<string>("");
 
   const addTaskOnList = () => {
-    const newTask = {
-      id: uuid(),
-      description,
-      isDone: false,
-    }
-
-    setTaskList((currentValue) => [...currentValue, newTask]);
+    setTaskList([{id: uuid(), description, isDone: false}, ...taskList]);
   }
 
   const removeTaskOnList = (id: string) => {
     setTaskList(
-      (currentValue) => currentValue.filter(task => task.id !== id)
+      (task) => task.filter(task => task.id !== id)
     );
   }
+
+  const changeStatusCheckBox = (id: string) => {
+    const elements = taskList.map((task) => {
+      if(task.id === id) {
+        return {
+          ...task,
+          isDone: !task.isDone
+        }
+      }
+      return task;
+    })
+
+    setTaskList(elements);
+  } 
 
   return (
     <div>
@@ -35,7 +43,10 @@ export const Content = () => {
                       className={styles.input} 
                       type="text" 
                       placeholder='Adicione uma nova tarefa' 
-                      onChange={(event: ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
+                      onChange={
+                        (event: ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)
+                      }
+                      required
                     />
                     <button className={styles.button} onClick={() => addTaskOnList()}>
                       Criar
@@ -49,10 +60,15 @@ export const Content = () => {
                 <article className={styles.content_header}>
                   <article className={styles.tasks_container}>
                     <p className={styles.tasks_created}>Tarefas criadas</p>
+                    <span className={styles.span_value}>{taskList.length}</span>
+                  </article>
+                  <article className={styles.tasks_container}>
+                    <p className={styles.tasks_done}>Tarefas concluidas</p>
                     <span className={styles.span_value}>0</span>
                   </article>
                 </article>
-                {taskList.length === 0 ? <NoContent /> : <TodoList onDelete={removeTaskOnList} list ={taskList} /> }
+                {taskList.length === 0 ? <NoContent /> : <TodoList onDelete={removeTaskOnList} 
+                onChangeCheckBox={changeStatusCheckBox} list ={taskList} /> }
             </main>
         </section>
     </div>

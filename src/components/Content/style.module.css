@@ -1,6 +1,7 @@
 .section_container {
     background-color: var(--gray-500);
-    height: calc(100vh - 200px);
+    min-height: calc(100vh - 200px);
+    padding-bottom: 70px;
 
     display: flex;
     align-items: flex-start;
@@ -25,6 +26,15 @@
     border-radius: 8px;
 }
 
+.input:focus {
+    filter: brightness(1.2);
+}
+
+.input:focus-visible {
+    outline: 2px solid var(--purple-dark);
+}
+
+
 .button {
     display: flex;
     align-items: center;
@@ -42,7 +52,7 @@
 }
 
 .button:hover {
-    filter: brightness(1.5);
+    filter: brightness(1.2);
 }
 
 .img {
