@@ -10,8 +10,11 @@ export const Content = () => {
   const [taskList, setTaskList] = useState<Task[]>([]);
   const [description, setDescription] = useState<string>("");
 
+  const disableButton = !description.length;
+
   const addTaskOnList = () => {
     setTaskList([{id: uuid(), description, isDone: false}, ...taskList]);
+    setDescription("");
   }
 
   const removeTaskOnList = (id: string) => {
@@ -32,7 +35,11 @@ export const Content = () => {
     })
 
     setTaskList(elements);
-  } 
+  }
+
+  const tasksDone = taskList.filter((task) => {
+    return task.isDone !== false;
+  }) 
 
   return (
     <div>
@@ -42,13 +49,17 @@ export const Content = () => {
                     <input
                       className={styles.input} 
                       type="text" 
+                      value={description}
                       placeholder='Adicione uma nova tarefa' 
                       onChange={
                         (event: ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)
                       }
                       required
                     />
-                    <button className={styles.button} onClick={() => addTaskOnList()}>
+                    <button 
+                    className={styles.button} 
+                    onClick={() => addTaskOnList()}
+                    disabled={disableButton}>
                       Criar
                       <img 
                         className={styles.img} 
@@ -64,7 +75,7 @@ export const Content = () => {
                   </article>
                   <article className={styles.tasks_container}>
                     <p className={styles.tasks_done}>Tarefas concluidas</p>
-                    <span className={styles.span_value}>0</span>
+                    <span className={styles.span_value}> {tasksDone.length} de {taskList.length}</span>
                   </article>
                 </article>
                 {taskList.length === 0 ? <NoContent /> : <TodoList onDelete={removeTaskOnList} 

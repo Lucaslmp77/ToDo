@@ -27,7 +27,7 @@
 }
 
 .input:focus {
-    filter: brightness(1.2);
+    filter: brightness(1.25);
 }
 
 .input:focus-visible {
@@ -52,7 +52,12 @@
 }
 
 .button:hover {
-    filter: brightness(1.2);
+    filter: brightness(1.25);
+}
+
+.button:disabled {
+    filter: grayscale(100%);
+    cursor: not-allowed;
 }
 
 .img {
