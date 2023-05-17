@@ -1,23 +1,15 @@
 {
-    "tasks" : [
-        {
-            "id": "1",
-            "description": "opa texto de teste da descricao",
-            "isDone": false
-        },
-        {
-            "id": "2",
-            "description": "opa texto de teste da descricao",
-            "isDone": false
-        },
-        {
-            "id": "3",
-            "description": "opa texto de teste da descricao",
-            "isDone": true
-        }
-    ],
-    "users": [{
-        "name": "Lucas",
-        "isAdmin": true
-    }]
+  "tasks": [
+    {
+      "id": "95676f8a-b7ea-4a39-9324-740b58b75473",
+      "description": "lucas",
+      "isDone": false
+    }
+  ],
+  "users": [
+    {
+      "name": "Lucas",
+      "isAdmin": true
+    }
+  ]
 }

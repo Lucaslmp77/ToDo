@@ -8,23 +8,51 @@ import { Task } from "../../models/task";
 import { api } from "../../configs/api";
 
 export const Content = () => {
+
   const [taskList, setTaskList] = useState<Task[]>([]);
   const [description, setDescription] = useState<string>("");
 
   const disableButton = !description.length;
 
   const addTaskOnList = () => {
-    setTaskList([{id: uuid(), description, isDone: false}, ...taskList]);
-    setDescription("");
+
+    const newTask = {
+      id: uuid(),
+      description,
+      isDone: false,
+    }
+
+    api.post("tasks", newTask)
+    .then((response) => setTaskList((currentValue) => [...currentValue, response.data]) )
+    .finally(() => setDescription(""));
+
+    // setTaskList([{id: uuid(), description, isDone: false}, ...taskList]);
+    // setDescription("");
   }
 
   const removeTaskOnList = (id: string) => {
-    setTaskList(
-      (task) => task.filter(task => task.id !== id)
-    );
+
+    api.delete(`tasks/${id}`)
+    .then( () => setTaskList(
+      (task) => task.filter(task => task.id !== id) 
+    ) );
+
+    // setTaskList(
+    //   (task) => task.filter(task => task.id !== id)
+      
+    // );
   }
 
   const changeStatusCheckBox = (id: string) => {
+
+    const task = taskList.find(task => task.id === id);
+
+    if(task){
+      api.patch(`tasks/${id}`, {
+        isDone: !task.isDone,
+      });
+    }
+
     const elements = taskList.map((task) => {
       if(task.id === id) {
         return {
@@ -43,7 +71,7 @@ export const Content = () => {
   }) 
 
   useEffect(() => {
-    api.get("tasks").then((response) => setTaskList(response.data as Task[]))
+    api.get("tasks").then((response) => setTaskList(response.data as Task[]));
   }, []);
 
   return (
