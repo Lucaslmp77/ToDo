@@ -1,0 +1,23 @@
+{
+    "tasks" : [
+        {
+            "id": "1",
+            "description": "opa texto de teste da descricao",
+            "isDone": false
+        },
+        {
+            "id": "2",
+            "description": "opa texto de teste da descricao",
+            "isDone": false
+        },
+        {
+            "id": "3",
+            "description": "opa texto de teste da descricao",
+            "isDone": true
+        }
+    ],
+    "users": [{
+        "name": "Lucas",
+        "isAdmin": true
+    }]
+}

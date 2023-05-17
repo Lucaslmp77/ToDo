@@ -1,10 +1,11 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { v4 as uuid } from 'uuid';
 import styles from './style.module.css'
 import plus from '../../assets/plus.svg'
 import { NoContent } from '../NoContent'
 import { TodoList } from "../TodoList";
 import { Task } from "../../models/task";
+import { api } from "../../configs/api";
 
 export const Content = () => {
   const [taskList, setTaskList] = useState<Task[]>([]);
@@ -40,6 +41,10 @@ export const Content = () => {
   const tasksDone = taskList.filter((task) => {
     return task.isDone !== false;
   }) 
+
+  useEffect(() => {
+    api.get("tasks").then((response) => setTaskList(response.data as Task[]))
+  }, []);
 
   return (
     <div>
