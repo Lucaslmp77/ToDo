@@ -1,18 +1,22 @@
-import { ChangeEvent, useEffect, useState, useContext } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { v4 as uuid } from 'uuid';
 import styles from './style.module.css'
 import plus from '../../assets/plus.svg'
 import { NoContent } from '../NoContent'
 import { TodoList } from "../TodoList";
 import { Task } from "../../models/task";
+import { Toast } from "../Toast";
 import { api } from "../../configs/api";
 import useToDoContext from "../../hooks/useToDoContext";
+import { useToast } from "../../hooks/useToast";
 
 export const Content = () => {
 
   const [description, setDescription] = useState<string>("");
 
   const { taskListState, setTaskListState } = useToDoContext();
+
+  const { showToast } = useToast();
 
   const disableButton = !description.length;
 
@@ -26,7 +30,13 @@ export const Content = () => {
 
     api.post("tasks", newTask)
     .then((response) => setTaskListState((currentValue) => [...currentValue, response.data]) )
-    .finally(() => setDescription(""));
+    .finally(() =>  { 
+      setDescription("") 
+      showToast({
+      message: "Tarefa adicionada com sucesso",
+      type: "success"
+    })
+  });
   }
 
   const removeTaskOnList = (id: string) => {
