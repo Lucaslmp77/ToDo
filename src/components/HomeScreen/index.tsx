@@ -10,7 +10,7 @@ export const HomeScreen = () => {
       </article>
       <article>
         <Link to="/to-do">
-          <img src={imgCapa} alt="Imagem da capa da aplicação" />
+          <img className={styles.img_capa} src={imgCapa} alt="Imagem da capa da aplicação" />
         </Link>
       </article>
     </section>

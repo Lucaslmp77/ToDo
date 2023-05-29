@@ -17,13 +17,16 @@
 h1 {
     font-style: normal;
     font-weight: 700;
-    font-size: 124px;
+    font-size: 114px;
 
     margin: 0;
+    margin-left: 160px;
+    padding-bottom: 20px;
 
     color: var(--gray-100);
 }
 
-img {
-    width: auto;
+.img_capa {
+   width: 1250px;
+   height: 500px;
 }
