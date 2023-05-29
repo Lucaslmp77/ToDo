@@ -5,7 +5,6 @@ import plus from '../../assets/plus.svg'
 import { NoContent } from '../NoContent'
 import { TodoList } from "../TodoList";
 import { Task } from "../../models/task";
-import { Toast } from "../Toast";
 import { api } from "../../configs/api";
 import useToDoContext from "../../hooks/useToDoContext";
 import { useToast } from "../../hooks/useToast";
@@ -29,36 +28,36 @@ export const Content = () => {
     }
 
     api.post("tasks", newTask)
-    .then((response) => setTaskListState((currentValue) => [...currentValue, response.data]) )
-    .finally(() =>  { 
-      setDescription("") 
-      showToast({
-      message: "Tarefa adicionada com sucesso",
-      type: "success"
-    })
-  });
+      .then((response) => setTaskListState((currentValue) => [...currentValue, response.data]))
+      .finally(() => {
+        setDescription("")
+        showToast({
+          message: "Tarefa adicionada com sucesso",
+          type: "success"
+        })
+      });
   }
 
   const removeTaskOnList = (id: string) => {
 
     api.delete(`tasks/${id}`)
-    .then( () => setTaskListState(
-      (task) => task.filter(task => task.id !== id) 
-    ) );
+      .then(() => setTaskListState(
+        (task) => task.filter(task => task.id !== id)
+      ));
   }
 
   const changeStatusCheckBox = (id: string) => {
 
     const task = taskListState.find(task => task.id === id);
 
-    if(task){
+    if (task) {
       api.patch(`tasks/${id}`, {
         isDone: !task.isDone,
       });
     }
 
     const elements = taskListState.map((task) => {
-      if(task.id === id) {
+      if (task.id === id) {
         return {
           ...task,
           isDone: !task.isDone
@@ -72,7 +71,7 @@ export const Content = () => {
 
   const tasksDone = taskListState.filter((task) => {
     return task.isDone !== false;
-  }) 
+  })
 
   useEffect(() => {
     api.get("tasks").then((response) => setTaskListState(response.data as Task[]));
@@ -80,45 +79,45 @@ export const Content = () => {
 
   return (
     <div>
-        <section className={styles.section_container}>
-            <main>
-                <article className={styles.input_container}>
-                    <input
-                      className={styles.input} 
-                      type="text" 
-                      value={description}
-                      placeholder='Adicione uma nova tarefa' 
-                      onChange={
-                        (event: ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)
-                      }
-                      required
-                    />
-                    <button 
-                    className={styles.button} 
-                    onClick={() => addTaskOnList()}
-                    disabled={disableButton}>
-                      Criar
-                      <img 
-                        className={styles.img} 
-                        src={plus} 
-                        alt="icone de mais" 
-                      />
-                    </button>
-                </article>
-                <article className={styles.content_header}>
-                  <article className={styles.tasks_container}>
-                    <p className={styles.tasks_created}>Tarefas criadas</p>
-                    <span className={styles.span_value}>{taskListState.length}</span>
-                  </article>
-                  <article className={styles.tasks_container}>
-                    <p className={styles.tasks_done}>Tarefas concluidas</p>
-                    <span className={styles.span_value}> {tasksDone.length} de {taskListState.length}</span>
-                  </article>
-                </article>
-                {taskListState.length === 0 ? <NoContent /> : <TodoList onDelete={removeTaskOnList} 
-                onChangeCheckBox={changeStatusCheckBox} /> }
-            </main>
-        </section>
+      <section className={styles.section_container}>
+        <main>
+          <article className={styles.input_container}>
+            <input
+              className={styles.input}
+              type="text"
+              value={description}
+              placeholder='Adicione uma nova tarefa'
+              onChange={
+                (event: ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)
+              }
+              required
+            />
+            <button
+              className={styles.button}
+              onClick={() => addTaskOnList()}
+              disabled={disableButton}>
+              Criar
+              <img
+                className={styles.img}
+                src={plus}
+                alt="icone de mais"
+              />
+            </button>
+          </article>
+          <article className={styles.content_header}>
+            <article className={styles.tasks_container}>
+              <p className={styles.tasks_created}>Tarefas criadas</p>
+              <span className={styles.span_value}>{taskListState.length}</span>
+            </article>
+            <article className={styles.tasks_container}>
+              <p className={styles.tasks_done}>Tarefas concluidas</p>
+              <span className={styles.span_value}> {tasksDone.length} de {taskListState.length}</span>
+            </article>
+          </article>
+          {taskListState.length === 0 ? <NoContent /> : <TodoList onDelete={removeTaskOnList}
+            onChangeCheckBox={changeStatusCheckBox} />}
+        </main>
+      </section>
     </div>
   )
 }

@@ -8,7 +8,7 @@ type ToastProviderProps = {
 type Toast = {
     message: string;
     type: 'success' | 'danger';
-  }
+}
 
 export type ToastContextProps = {
     isHidden: boolean;
@@ -17,7 +17,7 @@ export type ToastContextProps = {
 
 const ToastContext = createContext<ToastContextProps>({
     isHidden: false,
-    showToast: () => {}
+    showToast: () => { }
 } as ToastContextProps)
 
 const ToastProvider = ({ children }: ToastProviderProps) => {
@@ -35,16 +35,16 @@ const ToastProvider = ({ children }: ToastProviderProps) => {
         })
 
         setIsHidden(false);
-    
+
         setTimeout(() => {
-          setIsHidden(true);
+            setIsHidden(true);
         }, 2800);
-      }
+    }
 
     return (
         <ToastContext.Provider value={{ isHidden, showToast }}>
             {!isHidden &&
-            <Toast message={toast.message} type={toast.type} />}
+                <Toast message={toast.message} type={toast.type} />}
 
             {children}
         </ToastContext.Provider>
