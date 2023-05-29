@@ -6,7 +6,7 @@ export const HomeScreen = () => {
   return (
     <section className={styles.section_container}>
       <article className={styles.title_container}>
-        <h1>ToDo List</h1>
+        <h1 className={styles.title_capa}>ToDo List</h1>
       </article>
       <article>
         <Link to="/to-do">
