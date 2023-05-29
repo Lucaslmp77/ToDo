@@ -43,7 +43,12 @@ export const Content = () => {
     api.delete(`tasks/${id}`)
       .then(() => setTaskListState(
         (task) => task.filter(task => task.id !== id)
-      ));
+      )).finally(() => {
+        showToast({
+          message: "Tarefa removida com sucesso",
+          type: "danger"
+        })
+      });
   }
 
   const changeStatusCheckBox = (id: string) => {
