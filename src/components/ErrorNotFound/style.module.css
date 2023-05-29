@@ -1,0 +1,25 @@
+.error_page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    height: 100vh;
+
+    font-size: 40px;
+    background-color: black;
+    color: white;
+}
+
+.button {
+    width: 150px;
+    height: 52px;
+    margin-top: 50px;
+
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+
+    background: var(--blue-dark);
+    color: var(--gray-100);
+}
