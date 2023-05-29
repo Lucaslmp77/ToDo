@@ -1,0 +1,32 @@
+.section_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    height: 100vh;
+    gap: 40px;
+
+    background-color: var(--blue-dark);
+}
+
+.title_container {
+    min-width: 1440px;
+}
+
+.title_capa {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 114px;
+
+    margin: 0;
+    margin-left: 160px;
+    padding-bottom: 20px;
+
+    color: var(--gray-100);
+}
+
+.img_capa {
+   width: 1250px;
+   height: 500px;
+}
